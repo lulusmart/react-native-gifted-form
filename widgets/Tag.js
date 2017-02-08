@@ -124,16 +124,12 @@ class Tag extends Component {
 
         const inputWidth = (spaceLeft < 100) ? this.wrapperWidth : spaceLeft - 10;
 
-        if (spaceLeft < 100) {
-          if (this.state.lines < this.props.numberOfLines) {
-            const lines = this.state.lines + 1;
+        if (this.state.lines < this.props.numberOfLines) {
+          const lines = this.state.lines + 1;
 
-            this.setState({ inputWidth, lines });
-          } else {
-            this.setState({ inputWidth }, () => this.scrollToBottom());
-          }
+          this.setState({ inputWidth, lines });
         } else {
-          this.setState({ inputWidth });
+          this.setState({ inputWidth }, () => this.scrollToBottom());
         }
       });
     }, 0);
@@ -281,7 +277,6 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     flexDirection: 'row',
-    marginTop: 3,
     marginBottom: 2,
     alignItems: 'flex-start',
   },
@@ -306,7 +301,7 @@ const styles = StyleSheet.create({
   },
   tag: {
     justifyContent: 'center',
-    marginTop: 6,
+    marginTop: 5,
     marginRight: 3,
     padding: 8,
     height: 24,

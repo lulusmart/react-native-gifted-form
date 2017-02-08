@@ -56,6 +56,7 @@ module.exports = React.createClass({
           </View>
 
           <TextInput
+            underlineColorAndroid='rgba(0,0,0,0)'
             ref='input'
             style={this.getStyle(['textInput'])}
 
@@ -79,11 +80,12 @@ module.exports = React.createClass({
           {this._renderImage()}
           {this._renderTitle()}
           <TextInput
+            underlineColorAndroid='rgba(0,0,0,0)'
             ref='input'
             style={this.getStyle(['textInputInline'])}
 
             {...this.props}
-
+            placeholder={this.state.focused ? '' : this.props.placeholder}
             onFocus={this.onFocus}
             onBlur={this.onBlur}
 
@@ -108,7 +110,6 @@ module.exports = React.createClass({
     if (newText !== oldText) {
       this._onChange(newText);
     }
-
   },
 
   onBlur() {
@@ -184,13 +185,15 @@ module.exports = React.createClass({
     textInputInline: {
       fontSize: 15,
       flex: 1,
+      textAlign: 'right',
+      paddingRight:10,
       height: 40,// @todo should be changed if underlined
       marginTop: 2,
     },
     textInputTitleInline: {
       width: 150,
-      fontSize: 15,
-      color: '#000',
+      fontSize: 16,
+      color: '#8892ad',
       paddingLeft: 10,
     },
     textInputTitle: {

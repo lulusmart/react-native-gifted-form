@@ -270,7 +270,7 @@ module.exports = React.createClass({
 
         {...this.props} // mainly for underlayColor
 
-        style={this.getStyle('rowContainer')}
+        style={[this.getStyle('rowContainer'),this.props.style]}
       >
         <View style={this.getStyle('row')}>
           {this._renderImage()}
@@ -310,7 +310,7 @@ module.exports = React.createClass({
     modalTitle: {
       flex: 1,
       fontSize: 15,
-      color: '#000',
+      color: '#8892ad',
       paddingLeft: 10,
     },
     alignRight: {

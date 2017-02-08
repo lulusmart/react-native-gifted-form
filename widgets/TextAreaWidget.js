@@ -10,44 +10,43 @@ var WidgetMixin = require('../mixins/WidgetMixin.js');
 
 module.exports = React.createClass({
   mixins: [WidgetMixin],
-  
+
   getDefaultProps() {
     return {
       type: 'TextAreaWidget',
     };
   },
-  
+
   render() {
     return (
-      <View style={this.getStyle('textAreaRow')}>
         <TextInput
-          style={this.getStyle('textArea')}
+          underlineColorAndroid='rgba(0,0,0,0)'
+          style={this.getStyle('textAreaRow')}
           multiline={true}
 
           {...this.props}
-          
+
           onFocus={() => this.props.onFocus(true)}
           onChangeText={this._onChange}
           value={this.state.value}
         />
-      </View>
     );
   },
-  
+
   defaultStyles: {
     textAreaRow: {
-      backgroundColor: '#FFF',
-      height: 120,
-      borderBottomWidth: 1 / PixelRatio.get(),
-      borderColor: '#c8c7cc',
-      alignItems: 'center',
-      paddingLeft: 10,
-      paddingRight: 10,
+      flex:1,
+      marginTop:5,
+      paddingLeft:15,
+      paddingRight:15,
+      paddingBottom:10,
+      fontSize:16,
+      backgroundColor:'white',
+      height: 200,
     },
     textArea: {
       fontSize: 15,
-      flex: 1,
     },
   },
-  
+
 });

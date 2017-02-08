@@ -41,7 +41,7 @@ module.exports = React.createClass({
           <View style={this.getStyle('row')}>
             <Tag
               value={this.props.value}
-              numberOfLines={2}
+              numberOfLines={3}
             />
           </View>
       </View>
@@ -50,14 +50,15 @@ module.exports = React.createClass({
 
   defaultStyles: {
     rowContainer: {
+      flex:1,
       backgroundColor: '#FFF',
       borderBottomWidth: 1 / PixelRatio.get(),
-      borderColor: '#c8c7cc',
+      borderBottomColor: '#c8c7cc',
     },
     row: {
-      height:80,
       flexDirection: 'row',
       paddingLeft: 10,
+      alignItems:'center'
     },
     underlayColor: '#c7c7cc',
     disclosure: {

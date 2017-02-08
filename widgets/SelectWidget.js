@@ -50,7 +50,7 @@ module.exports = React.createClass({
     });
 
     return (
-      <View>
+      <View style={{paddingTop:20}}>
         {this._childrenWithProps}
       </View>
     );
