@@ -2,11 +2,10 @@ var React = require('react');
 var {
   View,
   Text,
-  Switch,
   Platform,
   PixelRatio
 } = require('react-native')
-
+var Switch = require('./Switch');
 var WidgetMixin = require('../mixins/WidgetMixin.js');
 
 var GiftedSwitch = React.createClass({
@@ -14,6 +13,15 @@ var GiftedSwitch = React.createClass({
     return (
       <Switch
         {...this.props}
+        buttonRadius={12}
+        switchWidth={40}
+        switchHeight={15}
+        inactiveButtonColor={'#EAEAEA'}
+        inactiveButtonPressedColor={'#cccccc'}
+        activeButtonColor={'#EAEAEA'}
+        activeButtonPressedColor={'#cccccc'}
+        activeBackgroundColor={'#3FC380'}
+        switchAnimationTime={150}
       />
     );
   },
@@ -87,7 +95,6 @@ module.exports = React.createClass({
     switchAlignRight: {
       alignItems: 'flex-end',
       justifyContent: 'center',
-      marginRight: 10,
     },
     switch: {
     },

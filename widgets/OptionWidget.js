@@ -13,52 +13,45 @@ var WidgetMixin = require('../mixins/WidgetMixin.js');
 
 module.exports = React.createClass({
   mixins: [WidgetMixin],
-  
+
   getDefaultProps() {
     return ({
       // onChange: null,
       type: 'OptionWidget',
     });
   },
-  
+
   _renderCheckmark() {
     if (this.state.value === true) {
       return (
         <Image
           style={this.getStyle('checkmark')}
           resizeMode={Image.resizeMode.contain}
-          source={require('../icons/check.png')}
+          source={require('../icons/new_select.png')}
+        />
+      );
+    } else {
+      return (
+        <Image
+          style={this.getStyle('checkmark')}
+          resizeMode={Image.resizeMode.contain}
+          source={require('../icons/unselect2.png')}
         />
       );
     }
-    return null;
   },
-  
-  _onClose() {
-    if (this.props.multiple === false) {
-      this.props.unSelectAll();
-      this._onChange(true);
-      
-      if (typeof this.props.onSelect === 'function') {
-        // console.log('onSelect');
-        this.props.onSelect(this.props.value);
-      }
-      
-      if (typeof this.props.onClose === 'function') {
-        this.props.onClose(this.props.title, this.props.navigator);
-      }
-    } else {
-      this._onChange(!this.state.value)
-    }
+
+  _onChangeValue() {
+    this._onChange(!this.state.value);
   },
-  
+
   render() {
     return (
       <View style={this.getStyle('rowContainer')}>
         <TouchableHighlight
-          onPress={this._onClose}
+          onPress={this._onChangeValue}
           underlayColor={this.getStyle('underlayColor').pop()}
-          {...this.props} // mainly for underlayColor
+          {...this.props}
         >
           <View style={this.getStyle('row')}>
             {this._renderImage()}
@@ -66,20 +59,20 @@ module.exports = React.createClass({
               {this.props.title}
             </Text>
             {this._renderCheckmark()}
-          </View>        
+          </View>
         </TouchableHighlight>
       </View>
     );
   },
-  
+
   defaultStyles: {
     rowImage: {
-      height: 20,
-      width: 20,
+      height: 40,
+      width: 40,
       marginLeft: 10,
     },
     checkmark: {
-      width: 23,
+      width: 30,
       marginRight: 10,
       marginLeft: 10,
     },
@@ -102,4 +95,3 @@ module.exports = React.createClass({
     },
   },
 });
-

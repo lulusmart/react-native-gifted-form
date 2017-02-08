@@ -6,7 +6,7 @@ var {
   Image,
   PixelRatio
 } = require('react-native')
-
+var Tag = require('./Tag');
 var WidgetMixin = require('../mixins/WidgetMixin.js');
 var TimerMixin = require('react-timer-mixin');
 
@@ -37,41 +37,27 @@ module.exports = React.createClass({
 
   render() {
     return (
-      <View style={this.getStyle('rowContainer')}>
-        <TouchableHighlight
-          onPress={() => {
-            this.requestAnimationFrame(() => {
-              this.props.onPress();
-            });
-          }}
-          underlayColor={this.getStyle('underlayColor').pop()}
-          {...this.props}
-        >
+      <View style={[this.getStyle('rowContainer'), this.props.style]}>
           <View style={this.getStyle('row')}>
-            {this._renderImage()}
-            <Text numberOfLines={1} style={this.getStyle('title')}>{this.props.title}</Text>
-            {this._renderDisclosure()}
+            <Tag
+              value={this.props.value}
+              numberOfLines={2}
+            />
           </View>
-        </TouchableHighlight>
       </View>
     );
   },
 
   defaultStyles: {
-    rowImage: {
-      height: 20,
-      width: 20,
-      marginLeft: 10,
-    },
     rowContainer: {
       backgroundColor: '#FFF',
       borderBottomWidth: 1 / PixelRatio.get(),
       borderColor: '#c8c7cc',
     },
     row: {
+      height:80,
       flexDirection: 'row',
-      height: 44,
-      alignItems: 'center',
+      paddingLeft: 10,
     },
     underlayColor: '#c7c7cc',
     disclosure: {

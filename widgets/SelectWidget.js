@@ -26,7 +26,7 @@ module.exports = React.createClass({
 
   render() {
     this._childrenWithProps = React.Children.map(this.props.children, (child, idx) => {
-      var val = child.props.value || child.props.title;
+      var val = child.props.value;
 
       return React.cloneElement(child, {
         formStyles: this.props.formStyles,

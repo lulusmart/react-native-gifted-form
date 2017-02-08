@@ -53,7 +53,7 @@ module.exports = React.createClass({
         <Image
           style={this.getStyle('disclosure')}
           resizeMode={Image.resizeMode.contain}
-          source={require('../icons/disclosure.png')}
+          source={require('../icons/newedit.png')}
         />
       );
     }
@@ -305,7 +305,7 @@ module.exports = React.createClass({
       // transform: [{rotate: '90deg'}],
       marginLeft: 10,
       marginRight: 10,
-      width: 11,
+      width: 20,
     },
     modalTitle: {
       flex: 1,
