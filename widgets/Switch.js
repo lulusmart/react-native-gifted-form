@@ -50,6 +50,15 @@ var MaterialSwitch = React.createClass({
 
   start: {},
 
+  componentWillReceiveProps: function(nextProps) {
+    if (nextProps.active !== this.props.active) {
+      if (nextProps.active) {
+        return this.activate()
+      }
+      this.deactivate()
+    }
+  },
+
   componentWillMount: function() {
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (evt, gestureState) => true,
