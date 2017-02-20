@@ -309,7 +309,7 @@ module.exports = React.createClass({
     },
     modalTitle: {
       flex: 1,
-      fontSize: 15,
+      fontSize: 13,
       color: '#8892ad',
       paddingLeft: 10,
     },

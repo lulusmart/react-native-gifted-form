@@ -87,7 +87,7 @@ module.exports = React.createClass({
       alignItems: 'center',
     },
     switchTitle: {
-      fontSize: 15,
+      fontSize: 13,
       color: '#8892ad',
       flex: 1,
       paddingLeft: 10,
