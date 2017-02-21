@@ -53,9 +53,11 @@ var MaterialSwitch = React.createClass({
   componentWillReceiveProps: function(nextProps) {
     if (nextProps.active !== this.props.active) {
       if (nextProps.active) {
-        return this.activate()
+        this.setState({state : true});
+        return this.state.position.setValue(this.state.width)
       }
-      this.deactivate()
+      this.setState({state : false});
+      this.state.position.setValue(0)
     }
   },
 
@@ -148,7 +150,7 @@ var MaterialSwitch = React.createClass({
     }
   },
 
-  activate() {
+  _open() {
     Animated.timing(
       this.state.position,
       {
@@ -156,10 +158,9 @@ var MaterialSwitch = React.createClass({
         duration: this.props.switchAnimationTime,
       }
     ).start();
-    this.changeState(true);
   },
 
-  deactivate() {
+  _close() {
     Animated.timing(
       this.state.position,
       {
@@ -167,6 +168,15 @@ var MaterialSwitch = React.createClass({
         duration: this.props.switchAnimationTime,
       }
     ).start();
+  },
+
+  activate() {
+    this._open();
+    this.changeState(true);
+  },
+
+  deactivate() {
+    this._close();
     this.changeState(false);
   },
 
