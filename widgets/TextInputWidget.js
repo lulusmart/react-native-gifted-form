@@ -185,7 +185,7 @@ module.exports = React.createClass({
     textInputInline: {
       fontSize: 15,
       flex: 1,
-      textAlign: 'right',
+      textAlign: 'left',
       paddingRight:10,
       height: 40,// @todo should be changed if underlined
       marginTop: 2,
