@@ -36,7 +36,6 @@ module.exports = React.createClass({
   defaultStyles: {
     textAreaRow: {
       flex:1,
-      marginTop:5,
       paddingLeft:15,
       paddingRight:15,
       paddingBottom:10,

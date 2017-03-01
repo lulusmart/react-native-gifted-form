@@ -17,50 +17,21 @@ module.exports = React.createClass({
   getDefaultProps() {
     return ({
       // onChange: null,
-      type: 'OptionWidget',
+      type: 'BarWidget',
     });
-  },
-
-  _renderCheckmark() {
-    if (this.state.value === true) {
-      return (
-        <Image
-          style={this.getStyle('checkmark')}
-          resizeMode={Image.resizeMode.contain}
-          source={require('../icons/new_select.png')}
-        />
-      );
-    } else {
-      return (
-        <Image
-          style={this.getStyle('checkmark')}
-          resizeMode={Image.resizeMode.contain}
-          source={require('../icons/unselect2.png')}
-        />
-      );
-    }
-  },
-
-  _onChangeValue() {
-    this._onChange(!this.state.value);
   },
 
   render() {
     return (
-      <View style={this.getStyle('rowContainer')}>
-        <TouchableHighlight
-          onPress={this._onChangeValue}
-          underlayColor={this.getStyle('underlayColor').pop()}
-          {...this.props}
-        >
+      <View
+        style={this.getStyle('rowContainer')}
+        {...this.props}>
           <View style={this.getStyle('row')}>
             {this._renderImage()}
             <Text numberOfLines={1} style={this.getStyle('switchTitle')}>
               {this.props.title}
             </Text>
-            {this._renderCheckmark()}
           </View>
-        </TouchableHighlight>
       </View>
     );
   },
@@ -70,6 +41,7 @@ module.exports = React.createClass({
       height: 40,
       width: 40,
       marginLeft: 10,
+      borderRadius: 5,
     },
     checkmark: {
       width: 30,
@@ -80,6 +52,7 @@ module.exports = React.createClass({
       backgroundColor: '#FFF',
       borderBottomWidth: 1 / PixelRatio.get(),
       borderColor: '#c8c7cc',
+      paddingBottom:10
     },
     row: {
       flexDirection: 'row',
@@ -88,9 +61,8 @@ module.exports = React.createClass({
     },
     underlayColor: '#c7c7cc',
     switchTitle: {
-      fontSize: 15,
-      color: '#000',
-      flex: 0.7,
+      fontSize: 18,
+      color: '#5E5959',
       paddingLeft: 10,
     },
   },

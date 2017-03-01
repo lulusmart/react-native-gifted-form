@@ -27,7 +27,7 @@ module.exports = React.createClass({
   render() {
     this._childrenWithProps = React.Children.map(this.props.children, (child, idx) => {
       var val = child.props.value;
-      var selected = child.props.selected;
+
       return React.cloneElement(child, {
         formStyles: this.props.formStyles,
         openModal: this.props.openModal,
@@ -40,13 +40,7 @@ module.exports = React.createClass({
 
         name: this.props.name+'{'+val+'}',
         ref: this.props.name+'{'+val+'}',
-        value: (() => { // Make sure value is boolean to generated child
-          if ('selected' in child.props) {
-            return selected;
-          }
-          return this.props.value === val;
-        })(),
-        rawValue: val, // directly expose the original value
+        value: val,
         unSelectAll: this.unSelectAll,
 
         multiple: this.props.multiple,
@@ -56,7 +50,7 @@ module.exports = React.createClass({
     });
 
     return (
-      <View style={{paddingTop:20}}>
+      <View>
         {this._childrenWithProps}
       </View>
     );

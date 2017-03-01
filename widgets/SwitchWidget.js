@@ -13,8 +13,6 @@ var GiftedSwitch = React.createClass({
     return (
       <Switch
         {...this.props}
-        active={this.props.value}
-        onChangeState={this.props.onValueChange}
         buttonRadius={12}
         switchWidth={40}
         switchHeight={15}
@@ -89,7 +87,7 @@ module.exports = React.createClass({
       alignItems: 'center',
     },
     switchTitle: {
-      fontSize: 13,
+      fontSize: 15,
       color: '#8892ad',
       flex: 1,
       paddingLeft: 10,

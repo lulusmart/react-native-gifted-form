@@ -50,17 +50,6 @@ var MaterialSwitch = React.createClass({
 
   start: {},
 
-  componentWillReceiveProps: function(nextProps) {
-    if (nextProps.active !== this.props.active) {
-      if (nextProps.active) {
-        this.setState({state : true});
-        return this.state.position.setValue(this.state.width)
-      }
-      this.setState({state : false});
-      this.state.position.setValue(0)
-    }
-  },
-
   componentWillMount: function() {
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (evt, gestureState) => true,
@@ -150,7 +139,7 @@ var MaterialSwitch = React.createClass({
     }
   },
 
-  _open() {
+  activate() {
     Animated.timing(
       this.state.position,
       {
@@ -158,9 +147,10 @@ var MaterialSwitch = React.createClass({
         duration: this.props.switchAnimationTime,
       }
     ).start();
+    this.changeState(true);
   },
 
-  _close() {
+  deactivate() {
     Animated.timing(
       this.state.position,
       {
@@ -168,15 +158,6 @@ var MaterialSwitch = React.createClass({
         duration: this.props.switchAnimationTime,
       }
     ).start();
-  },
-
-  activate() {
-    this._open();
-    this.changeState(true);
-  },
-
-  deactivate() {
-    this._close();
     this.changeState(false);
   },
 

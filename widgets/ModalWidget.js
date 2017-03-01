@@ -26,6 +26,7 @@ module.exports = React.createClass({
       disclosure: true,
       cancelable: false,
       displayValue: '',
+      border: true,
       onClose: () => {}
     };
   },
@@ -33,6 +34,7 @@ module.exports = React.createClass({
   propTypes: {
     type: React.PropTypes.string,
     scrollEnabled: React.PropTypes.bool,
+    border: React.PropTypes.bool,
     disclosure: React.PropTypes.bool,
     cancelable: React.PropTypes.bool,
     displayValue: React.PropTypes.string,
@@ -258,6 +260,12 @@ module.exports = React.createClass({
     return '';
   },
 
+  _borderStyle() {
+    if (this.props.border === false) {
+      return {'borderBottomWidth': 0};
+    }
+    return null;
+  },
   render() {
     return (
       <TouchableHighlight
@@ -270,7 +278,7 @@ module.exports = React.createClass({
 
         {...this.props} // mainly for underlayColor
 
-        style={[this.getStyle('rowContainer'),this.props.style]}
+        style={[this.getStyle('rowContainer'),this.props.style,this._borderStyle()]}
       >
         <View style={this.getStyle('row')}>
           {this._renderImage()}
@@ -309,7 +317,7 @@ module.exports = React.createClass({
     },
     modalTitle: {
       flex: 1,
-      fontSize: 13,
+      fontSize: 15,
       color: '#8892ad',
       paddingLeft: 10,
     },

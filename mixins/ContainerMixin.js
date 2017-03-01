@@ -3,7 +3,9 @@ import {
   ScrollView,
   View,
   Platform,
-  Dimensions
+  Dimensions,
+  InteractionManager,
+  ActivityIndicator,
 } from 'react-native';
 
 var GiftedFormManager = require('../GiftedFormManager');
@@ -31,6 +33,7 @@ module.exports = {
   getInitialState() {
     return {
       errors: [],
+      loading: true
     };
   },
 
@@ -111,13 +114,16 @@ module.exports = {
   },
 
   componentDidMount() {
-    this._y = 0;
-    this._pageY = 0;
-    this._locationY = 0;
+    InteractionManager.runAfterInteractions(() => {
+      this._y = 0;
+      this._pageY = 0;
+      this._locationY = 0;
 
-    if (this.props.scrollEnabled === true) {
-      this._scrollResponder = this.refs.container.getScrollResponder();
-    }
+      if (this.props.scrollEnabled === true) {
+        this._scrollResponder = this.refs.container.getScrollResponder();
+      }
+      this.setState({loading: false})
+    })
   },
 
   _renderContainerView() {
@@ -150,7 +156,7 @@ module.exports = {
 
         {...this.props}
       >
-        {this.childrenWithProps()}
+        {this.state.loading ? (<View style={{flex: 1, backgroundColor: '#fff', paddingTop: 40}}><ActivityIndicator /></View>): this.childrenWithProps()}
       </View>
     );
   },

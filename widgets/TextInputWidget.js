@@ -7,7 +7,6 @@ var {
 } = require('react-native')
 
 var WidgetMixin = require('../mixins/WidgetMixin.js');
-var Accordion = require('./Accordion');
 
 
 module.exports = React.createClass({
@@ -46,47 +45,30 @@ module.exports = React.createClass({
     );
   },
 
-  close() {
-    this.refNode.close();
-  },
-
-  open() {
-    this.refNode.open();
-  },
-
   _renderRow() {
 
     if (this.props.inline === false) {
       return (
         <View style={this.getStyle(['rowContainer'])}>
-          <Accordion
-            animationDuration={300} header={<View />}
-            expanded={this.props.expanded}
-            ref={ref => this.refNode = ref}
-            content={
-              <View>
-                <View style={this.getStyle(['titleContainer'])}>
-                  {this._renderImage()}
-                  <Text numberOfLines={1} style={this.getStyle(['textInputTitle'])}>{this.props.title}</Text>
-                </View>
+          <View style={this.getStyle(['titleContainer'])}>
+            {this._renderImage()}
+            <Text numberOfLines={1} style={this.getStyle(['textInputTitle'])}>{this.props.title}</Text>
+          </View>
 
-                <TextInput
-                  underlineColorAndroid='rgba(0,0,0,0)'
-                  ref='input'
-                  style={this.getStyle(['textInput'])}
+          <TextInput
+            underlineColorAndroid='rgba(0,0,0,0)'
+            ref='input'
+            style={this.getStyle(['textInput'])}
 
-                  {...this.props}
+            {...this.props}
 
-                  onFocus={this.onFocus}
-                  onBlur={this.onBlur}
+            onFocus={this.onFocus}
+            onBlur={this.onBlur}
 
 
-                  onChangeText={this._onChange}
-                  value={this.state.value}
-                />
-              </View>
-            }
-          />          
+            onChangeText={this._onChange}
+            value={this.state.value}
+          />
           {this._renderValidationError()}
           {this._renderUnderline()}
         </View>
@@ -215,17 +197,17 @@ module.exports = React.createClass({
       paddingLeft: 10,
     },
     textInputTitle: {
-      fontSize: 13,
+      flex: 1,
+      fontSize: 15,
       color: '#8892ad',
       paddingLeft: 10,
-      flex: 1
     },
     textInput: {
-      fontSize: 15,
+      fontSize: 18,
+      color: '#5E5959',
       flex: 1,
       height: 40,
-      marginLeft: 10,
-      paddingLeft: 0
+      paddingLeft: 10,
     },
   },
 });
