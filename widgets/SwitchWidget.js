@@ -13,6 +13,8 @@ var GiftedSwitch = React.createClass({
     return (
       <Switch
         {...this.props}
+        active={this.props.value}
+        onChangeState={this.props.onValueChange}
         buttonRadius={12}
         switchWidth={40}
         switchHeight={15}
