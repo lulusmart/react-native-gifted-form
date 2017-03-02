@@ -328,7 +328,8 @@ module.exports = React.createClass({
     modalValue: {
       fontSize: 15,
       color: '#c7c7cc',
-      width:150
+      width:150,
+      textAlign:'right'
     },
   },
 });
