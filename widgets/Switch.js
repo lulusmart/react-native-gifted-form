@@ -156,6 +156,7 @@ var MaterialSwitch = React.createClass({
       {
         toValue: this.state.width,
         duration: this.props.switchAnimationTime,
+        useNativeDriver: true
       }
     ).start();
     this.changeState(true);
@@ -167,6 +168,7 @@ var MaterialSwitch = React.createClass({
       {
         toValue: 0,
         duration: this.props.switchAnimationTime,
+        useNativeDriver: true
       }
     ).start();
     this.changeState(false);
