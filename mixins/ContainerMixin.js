@@ -126,6 +126,10 @@ module.exports = {
     })
   },
 
+  enableScroll(enabled) {
+    this.refs.container.setNativeProps({scrollEnabled: enabled})
+  },
+
   _renderContainerView() {
     var formStyles = this.props.formStyles;
     var viewStyle = [(this.props.isModal === false ? [styles.containerView, formStyles.containerView] : [styles.modalView, formStyles.modalView]), this.props.style];
