@@ -90,23 +90,27 @@ module.exports = React.createClass({
     }
     return (
       <View style={this.getStyle(['rowContainer'])}>
-        <View style={this.getStyle(['row'])}>
-          {this._renderImage()}
-          {this._renderTitle()}
-          <TextInput
-            underlineColorAndroid='rgba(0,0,0,0)'
-            ref='input'
-            style={this.getStyle(['textInputInline'])}
+        <Accordion animationDuration={300} header={<View />} expanded={this.props.expanded}
+              ref={ref => this.refNode = ref}
+              content={
+                <View style={this.getStyle(['row'])}>
+                  {this._renderImage()}
+                  {this._renderTitle()}
+                  <TextInput
+                    underlineColorAndroid='rgba(0,0,0,0)'
+                    ref='input'
+                    style={this.getStyle(['textInputInline'])}
 
-            {...this.props}
-            placeholder={this.state.focused ? '' : this.props.placeholder}
-            onFocus={this.onFocus}
-            onBlur={this.onBlur}
+                    {...this.props}
+                    placeholder={this.state.focused ? '' : this.props.placeholder}
+                    onFocus={this.onFocus}
+                    onBlur={this.onBlur}
 
-            onChangeText={this._onChange}
-            value={this.state.value}
-          />
-        </View>
+                    onChangeText={this._onChange}
+                    value={this.state.value}
+                  />
+                </View>
+              } />        
         {this._renderValidationError()}
         {this._renderUnderline()}
       </View>
