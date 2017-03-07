@@ -104,7 +104,7 @@ module.exports = React.createClass({
             <TouchableOpacity
               onPress={() => {
                 _self.requestAnimationFrame(() => {
-                  _self.onClose(null, navigator);
+                  _self.onCancel(navigator);
                 });
               }}
             >
@@ -158,7 +158,8 @@ module.exports = React.createClass({
   },
 
   componentWillMount() {
-    this._childrenWithProps = React.Children.map(this.props.children, (child) => {
+    this._childrenRef = []
+    this._childrenWithProps = React.Children.map(this.props.children, (child, i) => {
       return React.cloneElement(child, {
         formStyles: this.props.formStyles,
         openModal: this.props.openModal,
@@ -168,7 +169,7 @@ module.exports = React.createClass({
         onBlur: this.props.onBlur,
         onValidation: this.props.onValidation,
         onValueChange: this.props.onValueChange,
-
+        ref: ref => this._childrenRef[i] = ref,
         onClose: this.onClose,
       });
     });
@@ -178,6 +179,15 @@ module.exports = React.createClass({
     this.setState({
       value: this._getDisplayableValue(),
     });
+  },
+
+  onCancel(navigator = null) {
+    this._childrenRef.forEach(child => {
+      child.resetValue && child.resetValue()
+    })
+    if (navigator !== null) {
+      navigator.pop();
+    }
   },
 
   onClose(value, navigator = null) {

@@ -49,11 +49,6 @@ module.exports = {
   },
 
   componentDidMount() {
-    // get value from prop
-    if (typeof this.props.value !== 'undefined') {
-      this._setValue(this.props.value);
-      return;
-    }
     // get value from store
     var formState = GiftedFormManager.stores[this.props.formName];
     if (typeof formState !== 'undefined') {
@@ -61,15 +56,31 @@ module.exports = {
         this.setState({
           value: formState.values[this.props.name],
         });
+        this._originalValue = formState.values[this.props.name];
         this._validate(formState.values[this.props.name]);
+        return
       }
+    }
+    // get value from prop
+    if (typeof this.props.value !== 'undefined') {
+      this._setValue(this.props.value);
+      this._originalValue = this.props.value;
+      return;
     }
   },
 
   componentWillReceiveProps(nextProps) {
     if (typeof nextProps.value !== 'undefined' && nextProps.value !== this.props.value) {
       this._onChange(nextProps.value);
+      this._originalValue = nextProps.value;
     }
+  },
+
+  resetValue() {
+    if (this._resetValue) {
+      return this._resetValue();
+    }
+    this._setValue(this._originalValue);
   },
 
   // get the styles by priority
