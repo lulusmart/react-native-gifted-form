@@ -102,51 +102,6 @@ class Tag extends Component {
     numberOfLines: 2,
   };
 
-  measureWrapper = () => {
-    if (!this.refs.wrapper)
-      return;
-
-    this.refs.wrapper.measure((ox, oy, w, /*h, px, py*/) => {
-      this.wrapperWidth = w;
-      this.setState({ inputWidth: this.wrapperWidth });
-    });
-  };
-
-  calculateWidth = () => {
-    setTimeout(() => {
-      if (!this.refs['tag' + (this.props.value.length - 1)])
-        return;
-
-      this.refs['tag' + (this.props.value.length - 1)].measure((ox, oy, w, /*h, px, py*/) => {
-        const endPosOfTag = w + ox;
-        const margin = 3;
-        const spaceLeft = this.wrapperWidth - endPosOfTag - margin - 10;
-
-        const inputWidth = (spaceLeft < 100) ? this.wrapperWidth : spaceLeft - 10;
-
-        if (this.state.lines < this.props.numberOfLines) {
-          const lines = this.state.lines + 1;
-
-          this.setState({ inputWidth, lines });
-        } else {
-          this.setState({ inputWidth }, () => this.scrollToBottom());
-        }
-      });
-    }, 0);
-  };
-
-  componentDidMount() {
-    setTimeout(() => {
-      this.calculateWidth();
-    }, 100);
-  }
-
-  componentDidUpdate(prevProps: Props, /*prevState*/) {
-    if (prevProps.value.length != this.props.value.length || !prevProps.value) {
-      this.calculateWidth();
-    }
-  }
-
   onBlur = (event: Event) => {
     if (!event || !event.nativeEvent || !this.props.parseOnBlur)
       return;
@@ -218,8 +173,6 @@ class Tag extends Component {
     );
   };
 
-
-
   scrollToBottom = (animated: boolean = true) => {
     if (this.contentHeight > this.scrollViewHeight) {
       this.refs.scrollView.scrollTo({
@@ -243,22 +196,15 @@ class Tag extends Component {
     }
 
     const inputProps = { ...defaultInputProps, ...this.props.inputProps };
-
-    const wrapperHeight = (lines - 1) * 40 + 36;
-
-    const width = inputWidth ? inputWidth : 400;
-
     return (
       <View style={[styles.container]}>
         <View
-          style={[styles.wrapper,{height: wrapperHeight}]}
+          style={[styles.wrapper]}
           ref="wrapper"
-          onLayout={this.measureWrapper}>
+        >
           <ScrollView
             ref='scrollView'
             style={styles.tagInputContainerScroll}
-            onContentSizeChange={(w, h) => this.contentHeight = h}
-            onLayout={ev => this.scrollViewHeight = ev.nativeEvent.layout.height}
           >
             <View style={styles.tagInputContainer}>
               {value.map((tag, index) => this._renderTag(tag, index))}
@@ -301,7 +247,7 @@ const styles = StyleSheet.create({
   },
   tag: {
     justifyContent: 'center',
-    marginTop: 5,
+    marginBottom: 5,
     marginRight: 3,
     padding: 8,
     height: 24,
