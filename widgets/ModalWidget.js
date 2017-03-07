@@ -191,6 +191,20 @@ module.exports = React.createClass({
   },
 
   onClose(value, navigator = null) {
+    let saveCallback;
+    this._childrenRef.forEach(child => {
+      // Only support one save callback - for now, only RichTextWidget.
+      if (child.saveCallback) {
+        saveCallback = child.saveCallback;
+      }
+    })
+    if (saveCallback) {
+      return saveCallback(() => {
+        if (navigator !== null) {
+          navigator.pop();
+        }   
+      })
+    }
     if (typeof value === 'string') {
       this.setState({
         value: value,
