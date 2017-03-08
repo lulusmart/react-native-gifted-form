@@ -55,8 +55,8 @@ module.exports = {
       if (typeof formState.values[this.props.name] !== 'undefined') {
         this.setState({
           value: formState.values[this.props.name],
+          originalValue: formState.values[this.props.name]
         });
-        this._originalValue = formState.values[this.props.name];
         this._validate(formState.values[this.props.name]);
         return
       }
@@ -64,7 +64,9 @@ module.exports = {
     // get value from prop
     if (typeof this.props.value !== 'undefined') {
       this._setValue(this.props.value);
-      this._originalValue = this.props.value;
+      this.setState({
+        originalValue: this.props.value
+      })
       return;
     }
   },
@@ -72,7 +74,7 @@ module.exports = {
   componentWillReceiveProps(nextProps) {
     if (typeof nextProps.value !== 'undefined' && nextProps.value !== this.props.value) {
       this._onChange(nextProps.value);
-      this._originalValue = nextProps.value;
+      this.state.originalValue = nextProps.value;
     }
   },
 
@@ -80,7 +82,7 @@ module.exports = {
     if (this._resetValue) {
       return this._resetValue();
     }
-    this._setValue(this._originalValue);
+    this._setValue(this.state.originalValue);
   },
 
   // get the styles by priority

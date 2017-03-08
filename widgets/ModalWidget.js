@@ -157,24 +157,6 @@ module.exports = React.createClass({
     }
   },
 
-  componentWillMount() {
-    this._childrenRef = []
-    this._childrenWithProps = React.Children.map(this.props.children, (child, i) => {
-      return React.cloneElement(child, {
-        formStyles: this.props.formStyles,
-        openModal: this.props.openModal,
-        formName: this.props.formName,
-        navigator: this.props.navigator,
-        onFocus: this.props.onFocus,
-        onBlur: this.props.onBlur,
-        onValidation: this.props.onValidation,
-        onValueChange: this.props.onValueChange,
-        ref: ref => this._childrenRef[i] = ref,
-        onClose: this.onClose,
-      });
-    });
-  },
-
   componentDidMount() {
     this.setState({
       value: this._getDisplayableValue(),
@@ -202,7 +184,7 @@ module.exports = React.createClass({
       return saveCallback(() => {
         if (navigator !== null) {
           navigator.pop();
-        }   
+        }
       })
     }
     if (typeof value === 'string') {
@@ -291,6 +273,22 @@ module.exports = React.createClass({
     return null;
   },
   render() {
+    this._childrenRef = []
+    this._childrenWithProps = React.Children.map(this.props.children, (child, i) => {
+      return React.cloneElement(child, {
+        formStyles: this.props.formStyles,
+        openModal: this.props.openModal,
+        formName: this.props.formName,
+        navigator: this.props.navigator,
+        onFocus: this.props.onFocus,
+        onBlur: this.props.onBlur,
+        onValidation: this.props.onValidation,
+        onValueChange: this.props.onValueChange,
+        ref: ref => this._childrenRef[i] = ref,
+        onClose: this.onClose,
+      });
+    });
+
     return (
       <TouchableHighlight
         onPress={() => {

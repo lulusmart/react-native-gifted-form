@@ -17,9 +17,9 @@ class RichTextEditor extends React.Component {
   render() {
     let initValueStr;
     if (this.props.initValue) {
-      initValueStr = JSON.stringify(this.props.initValue)    
+      initValueStr = JSON.stringify(this.props.initValue)
       initValueStr = initValueStr.replace(/\'/g, "\\'")
-    }    
+    }
     let placeholder = this.props.placeholder
     return (
       <View style={{flex:1}}>
@@ -56,12 +56,12 @@ module.exports = React.createClass({
     if (data.type === 'updated') {
       return this.setState({updated: true})
     }
-    if (data.type === 'content') {      
+    if (data.type === 'content') {
       this._onChange({
         json: data.payload,
         html: data.payload_html
       })
-      this._saveCallback && this._saveCallback();      
+      this._saveCallback && this._saveCallback();
     }
   },
 
@@ -78,22 +78,22 @@ module.exports = React.createClass({
   },
 
   render() {
-    let initValue;    
+    let initValue;
     if (this.state.value && this.state.value.json) {
       initValue = this.state.value.json;
     }
-    return (      
+    return (
       <RichTextEditor
         initValue={initValue}
         {...this.props}
-        onMessage={this.onMessage.bind(this)}
+        onMessage={this.onMessage}
         onWebviewRef={ref => this.webviewRef = ref}
         source={require('./richedit.html')}
         style={this.getStyle('richTextArea')}/>
     );
   },
 
-  defaultStyles: {    
+  defaultStyles: {
     richTextArea: {
       flex:1,
       height: 400

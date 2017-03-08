@@ -210,7 +210,7 @@ module.exports = React.createClass({
     },
     textInputTitleInline: {
       width: 150,
-      fontSize: 16,
+      fontSize: 15,
       color: '#8892ad',
       paddingLeft: 10,
     },
@@ -221,7 +221,7 @@ module.exports = React.createClass({
       paddingLeft: 10,
     },
     textInput: {
-      fontSize: 18,
+      fontSize: 15,
       color: '#5E5959',
       flex: 1,
       height: 40,
