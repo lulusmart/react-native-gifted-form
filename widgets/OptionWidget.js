@@ -79,6 +79,7 @@ module.exports = React.createClass({
     },
     checkmark: {
       width: 30,
+      height: 30,
       marginRight: 10,
       marginLeft: 10,
     },
