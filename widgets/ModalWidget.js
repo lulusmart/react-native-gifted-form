@@ -336,6 +336,7 @@ module.exports = React.createClass({
       marginLeft: 10,
       marginRight: 10,
       width: 20,
+      height: 20,
     },
     modalTitle: {
       flex: 1,
