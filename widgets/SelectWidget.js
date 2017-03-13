@@ -50,7 +50,7 @@ module.exports = React.createClass({
         ref: this.props.name+'{'+val+'}',
         value: ('selected' in child.props) ? selected :  (this.props.value === val),
         unSelectAll: this.unSelectAll,
-
+        rawValue: child.props.value,
         multiple: this.props.multiple,
         onClose: this.props.onClose, // got from ModalWidget
         onSelect: this.props.onSelect, // got from DayPickerWidget
